@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>포트폴리오</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/main.js" defer></script>
+</head>
+<body>
+  <!-- 헤더 & 네비게이션 -->
+  <header class="header" id="header">
+    <nav class="nav">
+      <a href="#hero" class="nav-logo">PORTFOLIO</a>
+      
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#hero" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-controls">
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="다크 모드 토글">🌙</button>
+        <button id="hamburger" class="hamburger-btn" aria-label="메뉴 열기">
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+          <span class="hamburger-bar"></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- 메인 콘텐츠 -->
+  <main>
+    <!-- Hero 섹션 -->
+    <section id="hero" class="section hero fade-in">
+      <div class="hero-content">
+        <h1>안녕하세요, 프론트엔드 개발자입니다</h1>
+        <p>사용자 경험과 깔끔한 코드를 고민하는 개발자입니다.</p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-primary">프로젝트 보기</a>
+          <a href="#contact" class="btn btn-secondary">문의하기</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About 섹션 -->
+    <section id="about" class="section about fade-in">
+      <h2 class="section-title">About Me</h2>
+      <div class="about-container">
+        <img src="images/profile.jpg" alt="개발자 프로필 사진" class="about-img">
+        <article class="about-text">
+          <h3>기본에 충실한 웹 개발자</h3>
+          <p>HTML, CSS, JavaScript의 원리를 깊이 이해하고 실무에 적용하는 것을 즐깁니다.</p>
+          <p>GitHub API 연동 및 반응형 UI 구현을 통해 안정적인 웹 서비스를 만들어가고 있습니다.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Skills 섹션 -->
+    <section id="skills" class="section skills fade-in">
+      <h2 class="section-title">Skills</h2>
+      <ul class="skills-list">
+        <li class="skill-card">HTML5 / Semantic Web</li>
+        <li class="skill-card">CSS3 / Flexbox & Grid</li>
+        <li class="skill-card">JavaScript ES6+</li>
+        <li class="skill-card">Git / GitHub</li>
+        <li class="skill-card">REST API / Async Fetch</li>
+      </ul>
+    </section>
+
+    <!-- Projects 섹션 -->
+    <section id="projects" class="section projects fade-in">
+      <h2 class="section-title">Projects</h2>
+      <div id="projects-container" class="projects-grid">
+        <!-- JS 동적 렌더링 영역 -->
+      </div>
+    </section>
+
+    <!-- Contact 섹션 -->
+    <section id="contact" class="section contact fade-in">
+      <h2 class="section-title">Contact</h2>
+      <form id="contact-form" class="contact-form" novalidate>
+        <div class="form-group">
+          <label for="name">이름</label>
+          <input type="text" id="name" name="name" placeholder="이름을 입력하세요">
+          <span class="error-message" id="name-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="email">이메일</label>
+          <input type="email" id="email" name="email" placeholder="이메일을 입력하세요">
+          <span class="error-message" id="email-error"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="message">메시지</label>
+          <textarea id="message" name="message" rows="5" placeholder="메시지를 입력하세요"></textarea>
+          <span class="error-message" id="message-error"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-submit">보내기</button>
+        <div id="form-success" class="form-success-message"></div>
+      </form>
+    </section>
+  </main>
+
+  <!-- 푸터 -->
+  <footer class="footer">
+    <p>&copy; 2026 Developer Portfolio. All rights reserved.</p>
+    <div class="social-links">
+      <a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    </div>
+  </footer>
+
+  <!-- 스크롤 탑 버튼 -->
+  <button id="scroll-top-btn" class="scroll-top-btn" aria-label="맨 위로 이동">↑</button>
+</body>
+</html>
