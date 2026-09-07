@@ -1,11 +1,6 @@
 const GITHUB_USERNAME = 'jwhan12';
-
-// 화면에 필요한 값만 한곳에서 관리합니다.
-const state = {
-  theme: localStorage.getItem('theme') || 'light',
-  projects: { status: 'loading', data: [] },
-  formErrors: { name: '', email: '', message: '' },
-};
+const PROJECTS_API_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=6`;
+const FIELD_NAMES = ['name', 'email', 'message'];
 
 const elements = {
   header: document.querySelector('#site-header'),
@@ -28,10 +23,10 @@ const elements = {
   },
 };
 
-const applyTheme = () => {
-  document.documentElement.dataset.theme = state.theme;
+const applyTheme = (theme) => {
+  const isDark = theme === 'dark';
 
-  const isDark = state.theme === 'dark';
+  document.documentElement.dataset.theme = theme;
   elements.themeButton.textContent = isDark ? '☀️' : '🌙';
   elements.themeButton.setAttribute(
     'aria-label',
@@ -40,77 +35,118 @@ const applyTheme = () => {
 };
 
 const toggleTheme = () => {
-  state.theme = state.theme === 'light' ? 'dark' : 'light';
-  localStorage.setItem('theme', state.theme);
-  applyTheme();
+  const nextTheme = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+
+  localStorage.setItem('theme', nextTheme);
+  applyTheme(nextTheme);
 };
 
-const renderProjects = () => {
-  const { status, data } = state.projects;
+const createStateCard = (message) => {
+  const card = document.createElement('div');
+  const description = document.createElement('p');
 
+  card.className = 'project-card state-card';
+  description.textContent = message;
+  card.append(description);
+
+  return card;
+};
+
+const createLoadingCard = () => {
+  const card = createStateCard('프로젝트를 불러오는 중입니다...');
+  const spinner = document.createElement('div');
+
+  spinner.className = 'spinner';
+  card.prepend(spinner);
+
+  return card;
+};
+
+const createErrorCard = () => {
+  const card = createStateCard('프로젝트를 불러올 수 없습니다.');
+  const retryButton = document.createElement('button');
+
+  retryButton.className = 'button button--primary retry-button';
+  retryButton.type = 'button';
+  retryButton.textContent = '다시 시도';
+  retryButton.addEventListener('click', fetchProjects);
+  card.append(retryButton);
+
+  return card;
+};
+
+const createProjectCard = (repository) => {
+  const {
+    name,
+    description,
+    language,
+    stargazers_count: stars,
+    html_url: url,
+  } = repository;
+  const card = document.createElement('article');
+  const title = document.createElement('h3');
+  const summary = document.createElement('p');
+  const metadata = document.createElement('div');
+  const languageLabel = document.createElement('span');
+  const starsLabel = document.createElement('span');
+  const link = document.createElement('a');
+
+  card.className = 'project-card';
+  title.textContent = name;
+  summary.textContent = description || '저장소 설명이 없습니다.';
+  metadata.className = 'project-meta';
+  languageLabel.textContent = language || '언어 정보 없음';
+  starsLabel.textContent = `★ ${stars}`;
+  link.className = 'project-link';
+  link.href = url;
+  link.target = '_blank';
+  link.rel = 'noreferrer';
+  link.textContent = '저장소 보기 →';
+
+  metadata.append(languageLabel, starsLabel);
+  card.append(title, summary, metadata, link);
+
+  return card;
+};
+
+const renderProjects = (status, repositories = []) => {
   if (status === 'loading') {
-    elements.projectsContainer.innerHTML = `
-      <div class="project-card state-card">
-        <div class="spinner"></div>
-        <p>프로젝트를 불러오는 중입니다...</p>
-      </div>`;
+    elements.projectsContainer.replaceChildren(createLoadingCard());
     return;
   }
 
   if (status === 'error') {
-    elements.projectsContainer.innerHTML = `
-      <div class="project-card state-card">
-        <p>프로젝트를 불러올 수 없습니다.</p>
-        <button class="button primary retry-button" type="button">다시 시도</button>
-      </div>`;
-    document.querySelector('.retry-button').addEventListener('click', fetchProjects);
+    elements.projectsContainer.replaceChildren(createErrorCard());
     return;
   }
 
   if (status === 'empty') {
-    elements.projectsContainer.innerHTML = `
-      <div class="project-card state-card"><p>표시할 프로젝트가 없습니다.</p></div>`;
+    elements.projectsContainer.replaceChildren(createStateCard('표시할 프로젝트가 없습니다.'));
     return;
   }
 
-  elements.projectsContainer.innerHTML = data.map((repo) => {
-    const { name, description, language, stargazers_count: stars, html_url: url } = repo;
-
-    return `
-      <article class="project-card">
-        <h3>${name}</h3>
-        <p>${description || '저장소 설명이 없습니다.'}</p>
-        <div class="project-meta">
-          <span>${language || '언어 정보 없음'}</span>
-          <span>★ ${stars}</span>
-        </div>
-        <a class="project-link" href="${url}" target="_blank" rel="noreferrer">저장소 보기 →</a>
-      </article>`;
-  }).join('');
+  const projectCards = document.createDocumentFragment();
+  repositories.forEach((repository) => projectCards.append(createProjectCard(repository)));
+  elements.projectsContainer.replaceChildren(projectCards);
 };
 
-const fetchProjects = async () => {
-  state.projects.status = 'loading';
-  renderProjects();
+async function fetchProjects() {
+  renderProjects('loading');
 
   try {
-    const response = await fetch(
-      `https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=6`,
-    );
+    const response = await fetch(PROJECTS_API_URL);
 
     if (!response.ok) {
       throw new Error(`GitHub API 오류: ${response.status}`);
     }
 
     const repositories = await response.json();
-    state.projects.data = repositories;
-    state.projects.status = repositories.length === 0 ? 'empty' : 'success';
-  } catch (error) {
-    state.projects.status = 'error';
+    const status = repositories.length === 0 ? 'empty' : 'success';
+    renderProjects(status, repositories);
+  } catch {
+    renderProjects('error');
   }
-
-  renderProjects();
-};
+}
 
 const validateField = (fieldName) => {
   const input = elements.inputs[fieldName];
@@ -123,15 +159,20 @@ const validateField = (fieldName) => {
     message = '올바른 이메일 형식이 아닙니다.';
   }
 
-  state.formErrors[fieldName] = message;
   elements.errors[fieldName].textContent = message;
-  input.classList.toggle('invalid', Boolean(message));
+  input.classList.toggle('is-invalid', Boolean(message));
+
   return !message;
+};
+
+const handleFieldInput = (event) => {
+  validateField(event.currentTarget.name);
 };
 
 const handleSubmit = (event) => {
   event.preventDefault();
-  const isValid = Object.keys(elements.inputs).map(validateField).every(Boolean);
+
+  const isValid = FIELD_NAMES.map(validateField).every(Boolean);
 
   if (!isValid) {
     elements.formSuccess.textContent = '';
@@ -143,20 +184,41 @@ const handleSubmit = (event) => {
 };
 
 const updateScrollUi = () => {
-  elements.header.classList.toggle('scrolled', window.scrollY > 60);
-  elements.scrollTopButton.classList.toggle('show', window.scrollY > 300);
+  elements.header.classList.toggle('is-scrolled', window.scrollY > 60);
+  elements.scrollTopButton.classList.toggle('is-visible', window.scrollY > 300);
 };
 
 const closeMenu = () => {
-  elements.navMenu.classList.remove('active');
+  elements.navMenu.classList.remove('is-open');
   elements.menuButton.setAttribute('aria-expanded', 'false');
+};
+
+const toggleMenu = () => {
+  const isOpen = elements.navMenu.classList.toggle('is-open');
+  elements.menuButton.setAttribute('aria-expanded', String(isOpen));
+};
+
+const handleAnchorClick = (event) => {
+  const target = document.querySelector(event.currentTarget.getAttribute('href'));
+
+  if (!target) {
+    return;
+  }
+
+  event.preventDefault();
+  target.scrollIntoView({ behavior: 'smooth' });
+  closeMenu();
+};
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 };
 
 const initRevealAnimation = () => {
   const observer = new IntersectionObserver((entries, currentObserver) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
+        entry.target.classList.add('is-visible');
         currentObserver.unobserve(entry.target);
       }
     });
@@ -165,32 +227,26 @@ const initRevealAnimation = () => {
   document.querySelectorAll('.reveal').forEach((section) => observer.observe(section));
 };
 
+const bindEvents = () => {
+  elements.themeButton.addEventListener('click', toggleTheme);
+  elements.menuButton.addEventListener('click', toggleMenu);
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', handleAnchorClick);
+  });
+  elements.scrollTopButton.addEventListener('click', scrollToTop);
+  window.addEventListener('scroll', updateScrollUi);
+  FIELD_NAMES.forEach((fieldName) => {
+    elements.inputs[fieldName].addEventListener('input', handleFieldInput);
+  });
+  elements.contactForm.addEventListener('submit', handleSubmit);
+};
+
 const init = () => {
-  applyTheme();
+  applyTheme(localStorage.getItem('theme') || 'light');
   fetchProjects();
   initRevealAnimation();
   updateScrollUi();
-
-  elements.themeButton.addEventListener('click', toggleTheme);
-  elements.menuButton.addEventListener('click', () => {
-    const isOpen = elements.navMenu.classList.toggle('active');
-    elements.menuButton.setAttribute('aria-expanded', String(isOpen));
-  });
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      document.querySelector(link.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
-      closeMenu();
-    });
-  });
-  elements.scrollTopButton.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-  window.addEventListener('scroll', updateScrollUi);
-  Object.keys(elements.inputs).forEach((fieldName) => {
-    elements.inputs[fieldName].addEventListener('input', () => validateField(fieldName));
-  });
-  elements.contactForm.addEventListener('submit', handleSubmit);
+  bindEvents();
 };
 
 init();
