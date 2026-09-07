@@ -5,11 +5,19 @@
 
 ## 배포 URL
 
-PR 병합 후 GitHub Pages를 `main` 브랜치의 `/ (root)`로 설정하면 아래 주소에서 확인할 수 있습니다.
+GitHub Pages를 `main` 브랜치의 `/ (root)`로 설정하면 아래 주소에서 확인할 수 있습니다.
 
 - https://jwhan12.github.io/b1-1/
 
-> GitHub Pages 설정 방법은 [GitHub 공식 문서](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) 참고
+### GitHub Pages 배포 방법
+
+1. 변경 사항을 GitHub의 `main` 브랜치에 반영합니다.
+2. GitHub 저장소에서 `Settings` → `Pages`로 이동합니다.
+3. `Build and deployment`의 `Source`에서 `Deploy from a branch`를 선택합니다.
+4. 배포 브랜치를 `main`, 폴더를 `/ (root)`로 지정한 뒤 `Save`를 누릅니다.
+5. 배포가 완료되면 위 배포 URL에서 사이트를 확인합니다.
+
+> 자세한 내용은 [GitHub 공식 문서](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)를 참고하세요.
 
 ## 사용 기술과 기능
 
@@ -23,11 +31,12 @@ PR 병합 후 GitHub Pages를 `main` 브랜치의 `/ (root)`로 설정하면 아
 
 ## 실행 방법
 
-```bash
-python3 -m http.server 8000
-```
+1. [Visual Studio Code](https://code.visualstudio.com/)에서 프로젝트 폴더를 엽니다.
+2. Extensions에서 **Live Server** 확장을 검색해 설치합니다.
+3. `index.html`을 열고 에디터에서 마우스 오른쪽 버튼을 누른 뒤 **Open with Live Server**를 선택합니다.
+4. 브라우저에서 열린 페이지를 확인합니다. 파일을 저장하면 변경 사항이 실시간으로 반영됩니다.
 
-브라우저에서 `http://localhost:8000`을 엽니다.
+기본 설정에서는 `http://127.0.0.1:5500` 주소로 실행됩니다.
 
 ## 폴더 구조
 
