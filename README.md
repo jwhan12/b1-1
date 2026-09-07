@@ -1,6 +1,7 @@
-# jwhan12 Portfolio
+# 나를 소개하는 웹사이트 처음부터 만들기
 
-순수 HTML, CSS, JavaScript로 만든 반응형 포트폴리오 웹사이트입니다. 사용자 이벤트 → 상태 변경 → 화면 업데이트 흐름을 쉽게 확인할 수 있게 작성했습니다.
+순수 HTML, CSS, JavaScript로 만든 반응형 포트폴리오 웹사이트입니다.  
+사용자 이벤트 → 상태 변경 → 화면 업데이트 흐름을 쉽게 확인할 수 있게 작성했습니다.
 
 ## 배포 URL
 
@@ -8,7 +9,7 @@ PR 병합 후 GitHub Pages를 `main` 브랜치의 `/ (root)`로 설정하면 아
 
 - https://jwhan12.github.io/b1-1/
 
-GitHub Pages 설정 방법은 [GitHub 공식 문서](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site)를 참고하세요.
+> GitHub Pages 설정 방법은 [GitHub 공식 문서](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site) 참고
 
 ## 사용 기술과 기능
 
@@ -31,7 +32,7 @@ python3 -m http.server 8000
 ## 폴더 구조
 
 ```text
-.
+b1-1/
 ├── css/style.css
 ├── images/profile.svg
 ├── images/screenshots/
