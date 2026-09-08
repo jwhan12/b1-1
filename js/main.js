@@ -3,10 +3,10 @@ const PROJECTS_API_URL = `https://api.github.com/users/${GITHUB_USERNAME}/repos?
 const FIELD_NAMES = ['name', 'email', 'message'];
 
 const elements = {
-  header: document.querySelector('#site-header'),
+  header: document.querySelector('#site-header'), // #: html에서 site-header id를 찾겠다
   menuButton: document.querySelector('#menu-button'),
   navMenu: document.querySelector('#nav-menu'),
-  themeButton: document.querySelector('#theme-button'),
+  themeButton: document.querySelector('#theme-button'),  // html에서 id가 theme-button인거 찾기
   scrollTopButton: document.querySelector('#scroll-top-button'),
   projectsContainer: document.querySelector('#projects-container'),
   contactForm: document.querySelector('#contact-form'),
@@ -184,7 +184,7 @@ const handleSubmit = (event) => {
 };
 
 const updateScrollUi = () => {
-  elements.header.classList.toggle('is-scrolled', window.scrollY > 60);
+  elements.header.classList.toggle('is-scrolled', window.scrollY > 60);  // 사용자가 페이지를 아래로 60px보다 많이 스크롤할 경우: is-scrolled class 추가
   elements.scrollTopButton.classList.toggle('is-visible', window.scrollY > 300);
 };
 
@@ -249,4 +249,4 @@ const init = () => {
   bindEvents();
 };
 
-init();
+init();  // 저장된 테마 적용, Github 프로젝트 요청, 등장 애니메이션 준비, 스크롤 UI 계산, 이벤트 연결 시작

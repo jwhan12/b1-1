@@ -82,7 +82,8 @@ h2 {
   transition: background-color 0.25s, box-shadow 0.25s;
 }
 
-.site-header.is-scrolled {
+/* 사용자가 60px 이상 스크롤했을 경우, 헤더에 배경, 그림자, 블러 효과*/
+.site-header.is-scrolled { 
   background: var(--header);
   box-shadow: 0 2px 18px rgba(15, 23, 42, 0.08);
   backdrop-filter: blur(10px);
@@ -105,6 +106,7 @@ h2 {
   font-weight: 800;
 }
 
+/* html의 class="theme-button"에 적용 */
 .theme-button,
 .menu-button {
   width: 42px;
