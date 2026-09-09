@@ -184,7 +184,7 @@ const handleSubmit = (event) => {
 };
 
 const updateScrollUi = () => {
-  elements.header.classList.toggle('is-scrolled', window.scrollY > 60);  // 사용자가 페이지를 아래로 60px보다 많이 스크롤할 경우: is-scrolled class 추가
+  elements.header.classList.toggle('is-scrolled', window.scrollY > 60);  //사용자가 페이지를 아래로 60px보다 많이 스크롤할 경우: is-scrolled class 추가
   elements.scrollTopButton.classList.toggle('is-visible', window.scrollY > 300);
 };
 
@@ -205,8 +205,8 @@ const handleAnchorClick = (event) => {
     return;
   }
 
-  event.preventDefault();
-  target.scrollIntoView({ behavior: 'smooth' });
+  event.preventDefault();  //<a> 태그가 원래 하려고 했던 기본 행동은 하지 마
+  target.scrollIntoView({ behavior: 'smooth' });  //target이 보이는 위치까지 화면을 부드럽게 스크롤
   closeMenu();
 };
 
@@ -224,7 +224,7 @@ const initRevealAnimation = () => {
     });
   }, { threshold: 0.2 });
 
-  document.querySelectorAll('.reveal').forEach((section) => observer.observe(section));
+  document.querySelectorAll('.reveal').forEach((section) => observer.observe(section));  //reveal 클래스 모두 찾아 is-visible 추가
 };
 
 const bindEvents = () => {

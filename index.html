@@ -1,6 +1,6 @@
 <!doctype html>  <!--최신 HTML문서-->
-<html lang="ko">  <!--주 언어: 한국어-->
-  <head>
+<html lang="ko">  <!--html태그: HTML문서의 시작을 알림, lang: 속성 (주 언어: 한국어)-->
+  <head>  <!--화면에 표시되지 않음, 페이지에 대한 metadata 포함-->
     <meta charset="UTF-8" />  <!--UTF-8 문자 인코딩으로 한글 올바르게 표시-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />  <!--모바일 기기의 실제 화면 너비를 기준으로 페이지 표시-->
     <meta name="description" content="jwhan12의 반응형 포트폴리오 웹사이트" />  <!--검색 결과 등에 사용될 수 있는 페이지 설명-->
@@ -8,50 +8,50 @@
     <link rel="stylesheet" href="css/style.css" />  <!--link태그: style.css 파일 연결-->
     <script src="js/main.js" defer></script>  <!--main.js 파일 불러옴, defer로 인해 HTML 끝까지 읽은 후 DOM 생성 후 main.js 실행-->
   </head>
-  <body>
+  <body>  <!--HTML 문서의 내용-->
     <header class="site-header" id="site-header">  <!--js가 해당 id를 찾아놓고, 사용자의 스크롤 여부에 따라 class 붙였다 뗐다 함-->
-      <nav class="navigation" aria-label="주요 메뉴">  <!--시각 장애인이 스크린 리더를 사용하여 이 지점에 도달했을 경우 "주요 메뉴" 라고 읽어줌 -->
-        <a class="logo" href="#home">jwhan12</a>. <!--id="home"으로 이동 후, section이 화면에 보이도록 스크롤 위치를 이동-->
+      <nav class="navigation" aria-label="주요 메뉴">  <!--aria-label: 시각 장애인이 스크린 리더를 사용하여 이 지점에 도달했을 경우 "주요 메뉴" 라고 읽어줌 -->
+        <a class="logo" href="#home">jwhan12</a>  <!--브라우저 화면(스크롤 위치)이 id="home"인 section이 있는 위치까지 이동. #home: home이라는 id를 찾아라-->
         <button
           class="theme-button" 
           id="theme-button"  
           type="button"
           aria-label="다크 모드로 전환"
-        >🌙</button> <!-- class는 CSS에서 디자인 적용, id는 javascript에서 클릭 적용-->
+        >🌙</button> <!--class는 CSS에서 디자인 적용, id는 javascript에서 클릭 적용-->
         <button
           class="menu-button"
           id="menu-button"
           type="button"
-          aria-controls="nav-menu"
+          aria-controls="nav-menu"  
           aria-expanded="false"
           aria-label="메뉴 열기"
-        >
-          <span></span>
+        >  <!--aria-controls="nav-menu"가 id="nav-menu"와 연결, 메뉴가 열리면 aria=expanded="true"로 변경-->
+          <span></span>  <!--CSS의 .menu-button class와 .menu-button span class-->
           <span></span>
           <span></span>
         </button>
-        <ul class="nav-menu" id="nav-menu">  <!--CSS에서 display: none >> 일단 숨겨-->
-          <li><a href="#home">Home</a></li>
+        <ul class="nav-menu" id="nav-menu">  <!--ul: 목록 전체-->
+          <li><a href="#home">Home</a></li>  <!--li: 목록 안의 항목 하나하나-->
           <li><a href="#about">About</a></li>
           <li><a href="#skills">Skills</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-    </header>
-    <main>
-      <section class="hero reveal" id="home">  <!--hero 클래스와 reveal 클래스 동시에 가짐, 사용자에게 보이면 is-visible class 추가-->
+    </header>  <!--보통 웹 페이지나 섹션의 상단에서 사용, 제목/로고/검색 폼/작성자 이름 등의 요소를 포함-->
+    <main>  <!--<body> 요소의 주 콘텐츠 정의-->
+      <section class="hero reveal" id="home">  <!--Hero영역: 홈페이지에 들어왔을 때 가장 먼저 크게 보이는 대표 영역-->
         <div class="hero-content">
           <p class="eyebrow">PORTFOLIO</p>
           <h1>안녕하세요,<br />jwhan12입니다.</h1>
           <p class="hero-text">HTML, CSS, JavaScript의 기본을 차근차근 익히고 있습니다.</p>
           <div class="hero-actions">
-            <a class="button button--primary" href="#projects">프로젝트 보기</a>
+            <a class="button button--primary" href="#projects">프로젝트 보기</a>. <!--CTA버튼: 사용자에게 어떤 행동을 유도하는 버튼-->
             <a class="button button--secondary" href="#contact">문의하기</a>
           </div>
         </div>
       </section>
-      <section class="section reveal" id="about">
+      <section class="section reveal" id="about">  <!--reveal: 나중에 나타날 대상, is-visible: 화면에 들어왔으니 보여줘-->
         <p class="eyebrow">ABOUT</p>
         <h2>기본을 이해하며 만드는 웹페이지</h2>
         <div class="about-content">
@@ -118,7 +118,7 @@
       </section>
     </main>
     <footer class="site-footer">
-      <p>© 2026 jwhan12. Built with HTML, CSS and JavaScript.</p>
+      <p>© 2026 jwhan12. Built with HTML, CSS and JavaScript.</p>  <!--p태그: paragrpgh(문단)-->
       <a href="https://github.com/jwhan12" target="_blank" rel="noreferrer">GitHub</a>
     </footer>
 
