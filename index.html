@@ -1,23 +1,23 @@
 <!doctype html>  <!--최신 HTML문서-->
-<html lang="ko">  <!--주 언어: 한국어-->
-  <head>
-    <meta charset="UTF-8" />  <!--UTF-8 문자 인코딩으로 한글 올바르게 표시-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />  <!--모바일 기기의 실제 화면 너비를 기준으로 페이지 표시-->
-    <meta name="description" content="jwhan12의 반응형 포트폴리오 웹사이트" />  <!--검색 결과 등에 사용될 수 있는 페이지 설명-->
+<html lang="ko">  <!--html: 태그, lang="ko": 속성(attribute)-->
+  <head>  <!--웹페이지 설정 정보(사용자가 직접 보는 내용보다 브라우저에게 알려주는 내용)-->
+    <meta charset="UTF-8" />  <!--UTF-8 문자 인코딩으로 한글 깨지지 않게 설정-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />  <!--모바일 화면에서도 제대로 보이게 설정-->
+    <meta name="description" content="jwhan12의 반응형 포트폴리오 웹사이트" />  <!--이 사이트가 어떤 사이트인지 설명-->
     <title>jwhan12 | Portfolio</title>  <!--브라우저 탭에 보이는 제목-->
-    <link rel="stylesheet" href="css/style.css" />  <!--link태그: style.css 파일 연결-->
-    <script src="js/main.js" defer></script>  <!--main.js 파일 불러옴, defer로 인해 HTML 끝까지 읽은 후 DOM 생성 후 main.js 실행-->
+    <link rel="stylesheet" href="css/style.css" />  <!--style.css 파일 연결-->
+    <script src="js/main.js" defer></script>  <!--main.js 파일 연결, defer로 인해 HTML 끝까지 읽은 후 DOM 생성 후 main.js 실행-->
   </head>
-  <body>
-    <header class="site-header" id="site-header">  <!--js가 해당 id를 찾아놓고, 사용자의 스크롤 여부에 따라 class 붙였다 뗐다 함-->
-      <nav class="navigation" aria-label="주요 메뉴">  <!--시각 장애인이 스크린 리더를 사용하여 이 지점에 도달했을 경우 "주요 메뉴" 라고 읽어줌 -->
-        <a class="logo" href="#home">jwhan12</a>. <!--id="home"으로 이동 후, section이 화면에 보이도록 스크롤 위치를 이동-->
+  <body>  <!--실제 웹페이지에서 보는 내용-->
+    <header class="site-header" id="site-header">  <!--웹사이트 상단 영역-->
+      <nav class="navigation" aria-label="주요 메뉴">  <!--메뉴 영역-->
+        <a class="logo" href="#home">jwhan12</a>  <!--id="home"으로 이동 후, section이 화면에 보이도록 스크롤 위치를 이동-->
         <button
           class="theme-button" 
           id="theme-button"  
           type="button"
           aria-label="다크 모드로 전환"
-        >🌙</button> <!-- class는 CSS에서 디자인 적용, id는 javascript에서 클릭 적용-->
+        >🌙</button> <!--class는 CSS에서 디자인 적용, id는 javascript에서 클릭 적용-->
         <button
           class="menu-button"
           id="menu-button"
@@ -31,22 +31,22 @@
           <span></span>
         </button>
         <ul class="nav-menu" id="nav-menu">  <!--CSS에서 display: none >> 일단 숨겨-->
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#skills">Skills</a></li>
+          <li><a href="#home">Home</a></li>  <!--href="#home": id="home"찾기>>Home위치로 이동-->
+          <li><a href="#about">About</a></li>  <!--a태그: 다른곳으로 이동할 수 있는 링크-->
+          <li><a href="#skills">Skills</a></li>  
           <li><a href="#projects">Projects</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
     </header>
-    <main>
-      <section class="hero reveal" id="home">  <!--hero 클래스와 reveal 클래스 동시에 가짐, 사용자에게 보이면 is-visible class 추가-->
-        <div class="hero-content">
-          <p class="eyebrow">PORTFOLIO</p>
-          <h1>안녕하세요,<br />jwhan12입니다.</h1>
+    <main>  <!--포트폴리오의 핵심 내용, 가장 중요한 부분-->
+      <section class="hero reveal" id="home">  <!--주제별로 나눈 페이지의 한 구역(home 영역)-->
+        <div class="hero-content">  <!--여러 HTML 요소를 하나의 그룹으로 묶는 상자-->
+          <p class="eyebrow">PORTFOLIO</p>  <!--문단, 일반적인 글-->
+          <h1>안녕하세요,<br />jwhan12입니다.</h1>  <!--페이지에서 가장 중요한 큰 제목(핵심 제목)-->
           <p class="hero-text">HTML, CSS, JavaScript의 기본을 차근차근 익히고 있습니다.</p>
           <div class="hero-actions">
-            <a class="button button--primary" href="#projects">프로젝트 보기</a>
+            <a class="button button--primary" href="#projects">프로젝트 보기</a>  <!--링크-->
             <a class="button button--secondary" href="#contact">문의하기</a>
           </div>
         </div>
@@ -59,7 +59,7 @@
             class="profile-image"
             src="images/profile.svg"
             alt="jwhan12를 나타내는 J 일러스트"
-          />
+          />  <!--이미지를 화면에 보여주는 태그, src: 해당 경로 이미지 가져와, 종료 태그 없음-->
           <article>
             <h3>작은 기능도 흐름을 생각합니다</h3>
             <p>
@@ -72,8 +72,8 @@
       <section class="section reveal" id="skills">
         <p class="eyebrow">SKILLS</p>
         <h2>사용하는 기술</h2>
-        <ul class="skills-list">
-          <li>
+        <ul class="skills-list">  <!--목록 전체를 감싸는 태그, <li>랑 같이 씀-->
+          <li>  <!--목록 안의 한 항목-->
             HTML<br /><span>시맨틱 마크업</span>
           </li>
           <li>
@@ -85,21 +85,21 @@
           <li>
             GitHub<br /><span>저장소 관리</span>
           </li>
-        </ul>
+        </ul>  <!--목록 끝-->
       </section>
       <section class="section reveal" id="projects">
         <p class="eyebrow">PROJECTS</p>
         <h2>GitHub 프로젝트</h2>
         <p class="section-description">GitHub API에서 최근 저장소를 불러옵니다.</p>
-        <div class="projects-grid" id="projects-container" aria-live="polite"></div>
+        <div class="projects-grid" id="projects-container" aria-live="polite"></div>  <!--GitHub 프로젝트 생성-->
       </section>
       <section class="section reveal" id="contact">
         <p class="eyebrow">CONTACT</p>
         <h2>메시지 보내기</h2>
-        <form class="contact-form" id="contact-form" novalidate>
+        <form class="contact-form" id="contact-form" novalidate>  <!--사용자로부터 데이터를 입력받아 서버로 전송하기 위한 양식 영역-->
           <div class="form-group">
             <label for="name">이름</label>
-            <input id="name" name="name" type="text" autocomplete="name" />
+            <input id="name" name="name" type="text" autocomplete="name" />  <!--사용자가 글자를 입력할 수 있는 입력창-->
             <p class="error-message" id="name-error"></p>
           </div>
           <div class="form-group">
@@ -109,7 +109,7 @@
           </div>
           <div class="form-group">
             <label for="message">메시지</label>
-            <textarea id="message" name="message" rows="5"></textarea>
+            <textarea id="message" name="message" rows="5"></textarea>  <!--<textarea>: 긴 글 입력-->
             <p class="error-message" id="message-error"></p>
           </div>
           <button class="button button--primary" type="submit">보내기</button>
