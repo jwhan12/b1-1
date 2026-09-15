@@ -129,6 +129,7 @@ h2 {
   background: currentColor;
 }
 
+/* html의 class="nav-menu"에 적용, display: none >> 일단 숨겨*/
 .nav-menu {
   position: absolute;
   top: 68px;
