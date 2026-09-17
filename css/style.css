@@ -1,6 +1,7 @@
+/* 색상과 공통값 설정(웹사이트에서 자주 사용할 값을 미리 이름 붙여 저장) */
 :root {
-  --background: #f7f8fc;
-  --surface: #ffffff;
+  --background: #f7f8fc; /* 전체 배경 */
+  --surface: #ffffff; /* 카드 배경 */
   --text: #1e293b;
   --muted: #64748b;
   --line: #dbe3ef;
@@ -13,6 +14,7 @@
   --radius: 16px;
 }
 
+/* 다크모드: body를 새로 만드는 것이 아니라, body가 참고하고 있는 --background 변수의 값 변경 */
 [data-theme="dark"] {
   --background: #101827;
   --surface: #1f2937;
@@ -27,47 +29,55 @@
   --success: #86efac;
 }
 
+/* 모든 html 요소 기본 설정 */
 * {
   box-sizing: border-box;
 }
 
+/* 스크롤 방식 설정 */
 html {
   scroll-behavior: smooth;
 }
 
+/* html 전체 기본 디자인 설정 */
 body {
   margin: 0;
-  background: var(--background);
+  background: var(--background); /* CSS변수: --background에 저장해놓은 값을 가져와 */
   color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  line-height: 1.7;
-  transition: background-color 0.25s, color 0.25s;
+  line-height: 1.7; /* 글 줄 사이 간격 */
+  transition: background-color 0.25s, color 0.25s; /* 색이 바뀔 때 부드럽게 바뀌기(흰색 → 스르륵 → 검은색) */
 }
 
+/* html 모든 <a>태그 찾음 */
 a {
-  color: inherit;
-  text-decoration: none;
+  color: inherit; /* 부모가 사용하는 글자색 따르기 */
+  text-decoration: none; /* 밑줄 없애기 */
 }
 
+/* 입력 요소 기본 설정 */
 button,
 input,
 textarea {
-  font: inherit;
+  font: inherit; /* 부모가 사용하는 글꼴 따르기 */
 }
 
+/* 버튼 위로 마우스 올렸을 때 손가락 모양으로 바꾸기: */
 button {
   cursor: pointer;
 }
 
+/* 제목들의 줄 간격 좁히기 */
 h1,
 h2,
 h3 {
   line-height: 1.2;
 }
 
+/* clamp: 화면 크기에 따라 글자 크기를 알아서 조절하되, 너무 작거나 크게 하지 않기 */
 h1 {
   margin: 0;
-  font-size: clamp(2.5rem, 10vw, 5rem);
+  font-size: clamp(2.5rem, 10vw, 5rem); 
 }
 
 h2 {
@@ -75,20 +85,22 @@ h2 {
   font-size: clamp(2rem, 5vw, 3rem);
 }
 
-.site-header {
-  position: fixed;
-  inset: 0 0 auto;
-  z-index: 10;
-  transition: background-color 0.25s, box-shadow 0.25s;
+/* 상단 메뉴(Header) */
+.site-header { /* .site-header >> site-header class 찾아라 */
+  position: fixed; /* 헤더 화면에 고정 */
+  inset: 0 0 auto; /* 헤더를 화면 맨 위에 붙여라 */
+  z-index: 10; /* 누가 앞에 보일 것인지 결정 */
+  transition: background-color 0.25s, box-shadow 0.25s; /* 헤더의 배경색이나 그림자가 서서히 바뀜*/
 }
 
-/* 사용자가 60px 이상 스크롤했을 경우, 헤더에 배경, 그림자, 블러 효과*/
+/* 사용자가 60px 이상 스크롤했을 경우, 헤더에 배경, 그림자, 블러 효과 */
 .site-header.is-scrolled { 
   background: var(--header);
   box-shadow: 0 2px 18px rgba(15, 23, 42, 0.08);
   backdrop-filter: blur(10px);
 }
 
+/* 상단 메뉴(Header) */
 .navigation {
   position: relative;
   display: flex;
@@ -99,6 +111,7 @@ h2 {
   padding: 0 20px;
 }
 
+/* HTML에서 class="logo" 찾아, ① 누구를 찾지? → ② 무엇을 바꾸지? → ③ 어떻게 바꾸지? */
 .logo {
   margin-right: auto;
   color: var(--primary);
@@ -169,6 +182,7 @@ h2 {
   scroll-margin-top: 68px;
 }
 
+/* 상단 메뉴(Header) */
 .hero {
   display: grid;
   min-height: 100vh;
@@ -328,6 +342,7 @@ h2 {
   text-align: center;
 }
 
+/* GitHub 프로젝트 로딩 화면 */
 .spinner {
   width: 32px;
   height: 32px;
@@ -338,12 +353,14 @@ h2 {
   animation: spin 0.8s linear infinite;
 }
 
+/* GitHub 프로젝트 로딩 화면 */
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
 
+/* Contact 입력 폼 */
 .contact-form {
   display: grid;
   max-width: 640px;
@@ -359,6 +376,7 @@ label {
   font-weight: 750;
 }
 
+/* Contact 입력 폼 */
 input,
 textarea {
   width: 100%;
@@ -380,6 +398,7 @@ textarea.is-invalid {
   border-color: var(--error);
 }
 
+/* Contact 입력 폼 */
 .error-message,
 .success-message {
   min-height: 1.4em;
@@ -410,6 +429,7 @@ textarea.is-invalid {
   margin: 0;
 }
 
+/* 위로가기 */
 .scroll-top-button {
   position: fixed;
   right: 20px;
@@ -430,6 +450,7 @@ textarea.is-invalid {
   display: block;
 }
 
+/* 스크롤 등장 효과 */
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -441,6 +462,7 @@ textarea.is-invalid {
   transform: translateY(0);
 }
 
+/* 화면 크기에 따른 반응형 처리 */
 @media (min-width: 768px) {
   .navigation {
     padding: 0 32px;
