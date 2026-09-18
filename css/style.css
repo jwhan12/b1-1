@@ -89,52 +89,54 @@ h2 {
 .site-header { /* .site-header >> site-header class 찾아라 */
   position: fixed; /* 헤더 화면에 고정 */
   inset: 0 0 auto; /* 헤더를 화면 맨 위에 붙여라 */
-  z-index: 10; /* 누가 앞에 보일 것인지 결정 */
+  z-index: 10; /* 누가 앞에 보일 것인지 결정 (헤더가 다른 내용보다 위에 보여야 해서 높게 적용) */
   transition: background-color 0.25s, box-shadow 0.25s; /* 헤더의 배경색이나 그림자가 서서히 바뀜*/
 }
 
 /* 사용자가 60px 이상 스크롤했을 경우, 헤더에 배경, 그림자, 블러 효과 */
 .site-header.is-scrolled { 
-  background: var(--header);
-  box-shadow: 0 2px 18px rgba(15, 23, 42, 0.08);
+  background: var(--header); /* 헤더 배경색 */
+  box-shadow: 0 2px 18px rgba(15, 23, 42, 0.08); /* 헤더 그림자 */
   backdrop-filter: blur(10px);
 }
 
 /* 상단 메뉴(Header) */
 .navigation {
   position: relative;
-  display: flex;
-  align-items: center;
-  min-height: 68px;
-  max-width: 1120px;
+  display: flex; /* 자식들을 가로로 한 줄로 배치 (navigation: 부모) */
+  align-items: center; /* 자식들을 세로 기준으로 가운데 배치 */
+  min-height: 68px; /* navigation 최솟값 */
+  max-width: 1120px; /* navigation 최대값 */
   margin: auto;
-  padding: 0 20px;
+  padding: 0 20px; /* padding: 위아래 좌우 */
 }
 
 /* HTML에서 class="logo" 찾아, ① 누구를 찾지? → ② 무엇을 바꾸지? → ③ 어떻게 바꾸지? */
 .logo {
-  margin-right: auto;
+  margin-right: auto; /* logo 오른쪽의 남는 공간 */
   color: var(--primary);
-  font-size: 1.2rem;
+  font-size: 1.2rem; /* HTML 문서의 가장 높은 곳에 있는 html 태그의 폰트 크기. 1rem = 16px */
   font-weight: 800;
 }
 
-/* html의 class="theme-button"에 적용 */
+/* html의 class="theme-button", "menu-button"에 적용 */
 .theme-button,
 .menu-button {
   width: 42px;
   height: 42px;
-  border: 0;
-  background: transparent;
+  border: 0; /* 테두리 제거 */
+  background: transparent; /* 버튼 배경 투명 */
   color: var(--text);
 }
 
+/* 햄버거 버튼 */
 .menu-button {
   display: grid;
   gap: 4px;
   place-content: center;
 }
 
+/* menu-button 안의 span 찾기_햄버거 버튼 스타일 적용*/
 .menu-button span {
   display: block;
   width: 22px;
@@ -142,12 +144,12 @@ h2 {
   background: currentColor;
 }
 
-/* html의 class="nav-menu"에 적용, display: none >> 일단 숨겨*/
+/* 햄버거 버튼 안 메뉴 */
 .nav-menu {
   position: absolute;
   top: 68px;
   right: 16px;
-  display: none;
+  display: none; /* 일단 화면에서 숨겨 */
   width: min(220px, calc(100vw - 32px));
   margin: 0;
   padding: 10px;
@@ -158,10 +160,12 @@ h2 {
   list-style: none;
 }
 
+/* 햄버거 버튼 클릭 시 메뉴 보임*/
 .nav-menu.is-open {
   display: block;
 }
 
+/* nav-menu 안 a 찾기_Home, About, Skills, Projects, Contact 링크 */
 .nav-menu a {
   display: block;
   padding: 10px 12px;
@@ -169,6 +173,7 @@ h2 {
   font-weight: 650;
 }
 
+/* 각 링크 안에 hover 적용_사용자가 클릭할 수 있음 인지 */
 .nav-menu a:hover {
   background: var(--background);
   color: var(--primary);
@@ -182,65 +187,73 @@ h2 {
   scroll-margin-top: 68px;
 }
 
-/* 상단 메뉴(Header) */
+/* 사이트 처음 들어왔을 때 가장 먼저 보이는 대표 영역 꾸미기 */
 .hero {
-  display: grid;
-  min-height: 100vh;
-  padding-top: 120px;
-  place-items: center start;
+  display: grid; /* 자식들을 격자판으로 배치 */
+  min-height: 100vh; /* vh: 브라우저 화면 높이를 기준으로 하는 단위 (현재 화면 높이의 100%) */
+  padding-top: 120px; /* Hero 위쪽 120px 여백: 본문이 헤더에 너무 가까이 붙는 걸 막기 */
+  place-items: center start; /* Grid 안에서의 내용 위치: 가운데, 왼쪽부터 시작 */
 }
 
+/* Hero 안의 글과 버튼을 전부 감싸고 있는 상자 */
 .hero-content {
-  max-width: 720px;
+  max-width: 720px; /* hero 안의 글 내용이 너무 옆으로 길어지지 않도록 최대 720px까지만 사용 */
 }
 
+/* 각 영역의 작은 카테고리 이름*/
 .eyebrow {
-  margin: 0 0 8px;
+  margin: 0 0 8px; /* 위 오른쪽 아래 왼쪽 */
   color: var(--primary);
   font-size: 0.78rem;
   font-weight: 800;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.14em; /* 글자 사이 간격 */
 }
 
+/* 제목 아래에 붙는 설명글 >> 같은 디자인 */
 .hero-text,
 .section-description {
   max-width: 620px;
-  color: var(--muted);
+  color: var(--muted); /* 기본 글자보다 살짝 연한 색 */
   font-size: 1.08rem;
 }
 
+/* 프로젝트보기, 문의하기 버튼 */
 .hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+  display: flex; /* 한 줄로 배치 */
+  flex-wrap: wrap; /* 화면이 좁아지면 다음 줄로 넘김 */
+  gap: 12px; /* 자식들 사이 간격 */
   margin-top: 30px;
 }
 
 .button {
-  display: inline-flex;
+  display: inline-flex; /* 버튼 내부 글자 flex 정렬, 버튼 자체는 내용 크기만큼 */
   justify-content: center;
   align-items: center;
-  min-height: 44px;
-  padding: 10px 18px;
-  border: 1px solid transparent;
+  min-height: 44px; /* 버튼의 최소 높이 */
+  padding: 10px 18px; /* padding: 위아래, 좌우 */
+  border: 1px solid transparent; /* 테두리 1px, 색상 투명 */
   border-radius: 10px;
   font-weight: 750;
   transition: transform 0.2s, background-color 0.2s;
 }
 
+/* 버튼 호버 */
 .button:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px); /* 위로 2px 이동 */
 }
 
+/* 메인 버튼 */
 .button--primary {
   background: var(--primary);
   color: #111827;
 }
 
+/* 메인 버튼 호버 */
 .button--primary:hover {
   background: var(--primary-dark);
 }
 
+/* 세컨더리 버튼 */
 .button--secondary {
   border-color: var(--line);
   background: var(--surface);
@@ -248,44 +261,49 @@ h2 {
 }
 
 .about-content {
-  display: grid;
-  align-items: center;
-  gap: 28px;
+  display: grid; /* 이미지와 글 grid 배치 */
+  align-items: center; /* 가운데 기준 */
+  gap: 28px; /* 이미지와 글 사이 공간 */
 }
 
 .profile-image {
-  width: min(220px, 70vw);
-  margin: auto;
-  filter: drop-shadow(var(--shadow));
+  width: min(220px, 70vw); /* 큰 화면일때 220px, 작은 화면일 경우 화면 폭의 70% */
+  margin: auto; /* 이미지 가운데 배치 */
+  filter: drop-shadow(var(--shadow)); /* 이미지 주변 그림자 */
 }
 
+/* about-content class의 article 태그 */
 .about-content article {
-  max-width: 600px;
+  max-width: 600px; /* 글이 600px까지 길어짐 */
 }
 
+/* about-content class와 project-card의 모든 p 태그 */
 .about-content p,
 .project-card p {
   color: var(--muted);
 }
 
+/* skills 카드 */
 .skills-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  display: grid; /* 격자 형태 배치 */
+  grid-template-columns: repeat(2, minmax(0, 1fr)); /* 똑같은 크기의 칸을 2개씩 만들고 가로 공간을 반으로 나눠 2개의 같은 크기 칸 생성*/
+  gap: 14px; /* 박스 사이 공간 */
+  margin: 0; /* margin과 padding 모두 브라우저가 기본으로 준 여백 제거 */
+  padding: 0; /* ul 태그는 브라우저가 기본적으로 여백을 제공하기 때문 */
+  list-style: none; /* ul, li 태그를 쓰면 붙는 맨앞의 동그라미 없앰 */
 }
 
+/* skills 카드 디자인 */
 .skills-list li,
 .project-card {
-  padding: 20px;
-  border: 1px solid var(--line);
+  padding: 20px; /* 카드 안쪽 20px 여백 */
+  border: 1px solid var(--line); /* 테두리 1px, 실선, 테두리색 */
   border-radius: var(--radius);
   background: var(--surface);
   box-shadow: var(--shadow);
 }
 
+/* li 태그 안의 글자 굵게 적용 */
 .skills-list li {
   font-weight: 800;
 }
@@ -294,226 +312,262 @@ h2 {
 .project-meta {
   color: var(--muted);
   font-size: 0.88rem;
-  font-weight: 500;
+  font-weight: 500; /* span 태그 글자는 덜 굵게*/
 }
 
 .projects-grid {
-  display: grid;
+  display: grid; /* 카드 여러개의 위치 */
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 18px;
+  /* auto-fit: 화면에 들어갈 수 있는 만큼 카드 넣기
+  minmax(230px): 카드 하나가 230px보다 작지 않게 */
 }
 
+/* 프로젝트 하나를 나타내는 카드 */
 .project-card {
-  display: flex;
-  flex-direction: column;
+  display: flex; /* 카드 하나 안의 내용 순서 */
+  flex-direction: column; /* 카드 안 내용 세로로 배치 */
   min-height: 230px;
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
+/* 프로젝트 카드 호버 */
 .project-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-4px); /* 살짝 떠오르는 효과 */
   box-shadow: 0 18px 35px rgba(30, 41, 59, 0.16);
 }
 
-.project-card h3 {
-  margin: 0;
-  font-size: 1.2rem;
+/* 프로젝트명_javascript가 createProjectCard() 호출하여 github에서 받아온 정보로 생성 */
+.project-card h3 { 
+  margin: 0; /* 브라우저가 기본적으로 주는 여백 0으로 없앰 */
+  font-size: 1.2rem; /* 프로젝트 이름 일반 글자보다 크게 */
 }
 
+/* github 저장소의 언어와 별 개수_javascript에서 프로젝트 카드에 넣어줌 */
 .project-meta {
   display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  margin-top: auto;
+  justify-content: space-between; /* 첫번째 요소는 왼쪽으로, 마지막 요소는 오른쪽으로 */
+  gap: 8px; /* 화면이 작아져 두 요소가 가까워져도 최소한의 간격 확보 */
+  margin-top: auto; /* 위쪽에 남는 공간 전부 가져가 >> 프로젝트 가지런하게 보임 */
 }
 
+/* 저장소 링크_프로젝트 카드의 저장소 링크 */
 .project-link {
-  margin-top: 18px;
+  margin-top: 18px; /* 언어와 별, 링크의 마진값 */
 }
 
+/* site-footer의 a 태그, 프로젝트 카드의 저장소 보기 */
 .site-footer a,
 .project-link {
-  color: var(--primary);
-  font-weight: 800;
+  color: var(--primary); /* 강조색 */
+  font-weight: 800; /* 굵은 글씨 */
 }
 
+/*javascript에서 프로젝트를 불러오는 상황에 따라 상태 보여줌(로딩중, 에러발생, 프로젝트 없음) */
 .state-card {
-  grid-column: 1 / -1;
-  text-align: center;
+  grid-column: 1 / -1; /* 안내 문구가 grid 첫번째 칸부터 마지막 칸까지 전부 차지 */
+  text-align: center; /* 가운데 정렬 */
 }
 
-/* GitHub 프로젝트 로딩 화면 */
+/* GitHub 프로젝트 로딩 화면 
+javascript가 github API 요청 > loading 상태의 경우 js가 spinner class 생성 > .spinner 읽음 > @keyframes spin 찾음 */
 .spinner {
   width: 32px;
   height: 32px;
-  margin: 0 auto 12px;
-  border: 4px solid var(--line);
-  border-top-color: var(--primary);
-  border-radius: 50%;
+  margin: 0 auto 12px; /* margin: 위, 좌우, 아래 */
+  border: 4px solid var(--line); /* 사방에 4px 테두리 */
+  border-top-color: var(--primary); /* 회전함을 인지하도록 위쪽 테두리만 색상 변경 */
+  border-radius: 50%; /* 동그란 테두리(거의 원) */
   animation: spin 0.8s linear infinite;
+  /* animation: 사용할 애니메이션 이름, 한바퀴 도는 시간, 처음부터 끝까지 같은 속도, 무한 반복 */
 }
 
-/* GitHub 프로젝트 로딩 화면 */
-@keyframes spin {
+/* @keyframes: 애니메이션이 어떻게 움직일지 생성 */
+@keyframes spin { 
   to {
-    transform: rotate(360deg);
+    transform: rotate(360deg); /* 360도 회전 */
   }
 }
 
 /* Contact 입력 폼 */
 .contact-form {
-  display: grid;
+  display: grid; /* 이름, 이름영역 처럼 차곡차곡 배치 */
   max-width: 640px;
-  gap: 18px;
+  gap: 18px; /* 항목 간 간격 */
 }
 
+/* label, input, error-message */
 .form-group {
   display: grid;
-  gap: 7px;
+  gap: 7px; /* 이름, 입력창, 에러 메세지 각각 7px 간격 */
 }
 
+/* 앞에 .이 없음 >> class가 아닌 모든 label 태그 선택 */
 label {
   font-weight: 750;
 }
 
-/* Contact 입력 폼 */
+/* 모든 input, textarea 태그에 적용_input: 한 줄 입력, textarea: 여러 줄 입력 */
 input,
 textarea {
-  width: 100%;
-  padding: 11px 12px;
-  border: 1px solid var(--line);
+  width: 100%; /* 텍스트 입력 시 입력창 가로 공간 전부 사용 */
+  padding: 11px 12px; /* padding: 위아래, 좌우 */
+  border: 1px solid var(--line); /* 입력창 테두리 생성: 두께, 실선, 테두리 색 */
   border-radius: 10px;
-  background: var(--surface);
-  color: var(--text);
+  background: var(--surface); /* 입력창 배경색 */
+  color: var(--text); /* 사용자가 입력하는 글자 색상 */
 }
 
+/* 사용자가 입력창 클릭 시 :focus로 변경 */
 input:focus,
 textarea:focus {
-  border-color: var(--primary);
+  border-color: var(--primary); /* 입력창 클릭 시 강조색 */
   outline: 3px solid color-mix(in srgb, var(--primary) 35%, transparent);
+  /* outline에 강한 강조색 테두리 + 주변에 연한 강조색 */
 }
 
+/* 사용자가 이름을 쓰지 않고 빈칸으로 둘 때 오류 발생 */
 input.is-invalid,
-textarea.is-invalid {
-  border-color: var(--error);
+textarea.is-invalid { /* input 태그, .is-invalid class 가진 요소 */
+  border-color: var(--error); /* 에러 색상 적용 */
 }
 
-/* Contact 입력 폼 */
+/* javascript가 에러/성공시 html p태그에 글자 생성 */
 .error-message,
 .success-message {
-  min-height: 1.4em;
-  margin: 0;
-  font-size: 0.9rem;
+  min-height: 1.4em; /* 에러/성공 메세지가 없어도 최소한의 자리 확보*/
+  margin: 0; /* p태그가 가지고 있는 기본적인 여백 제거 */
+  font-size: 0.9rem; /* 본문보다 조금 작은 글씨 */
 }
 
+/* 에러 메세지 색상 적용 */
 .error-message {
   color: var(--error);
 }
 
+/* 성공 메세지 색상 + 굵기 적용 */
 .success-message {
   color: var(--success);
   font-weight: 700;
 }
 
 .site-footer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 32px 20px;
-  border-top: 1px solid var(--line);
+  display: flex; /* footer 안의 두 요소를 가로로 배치 */
+  flex-wrap: wrap; /* 화면이 좁아 두 요소가 한 줄에 안들어갈 경우 다음 줄에 배치 >> 모바일 대응 */
+  justify-content: space-between; /* 첫 번째는 왼쪽, 두 번째는 오른쪽 배치 */
+  gap: 12px; /* 요소끼리 간격 12px */
+  padding: 32px 20px; /* padding: 위아래, 좌우 */
+  border-top: 1px solid var(--line); /* footer 위쪽 본문과의 구분선 */
   color: var(--muted);
 }
 
+/* footer 안의 p태그 기본 margin 제거 */
 .site-footer p {
   margin: 0;
 }
 
-/* 위로가기 */
+/* 위로가기 버튼 */
 .scroll-top-button {
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
+  position: fixed; /* 스크롤 시에도 화면에 고정 */
+  right: 20px; /* 오른쪽에서 20px */
+  bottom: 20px; /* 아래에서 20px */
   z-index: 5;
-  display: none;
+  display: none; /* hero 화면에선 숨기기 */
   width: 46px;
   height: 46px;
   border: 0;
-  border-radius: 50%;
+  border-radius: 50%; /* 원 모양 */
   background: var(--primary);
   box-shadow: var(--shadow);
   color: #111827;
   font-size: 1.5rem;
 }
 
+/* 버튼 생성_사용자가 아래로 스크롤 >> .is-visible class 생성 */
 .scroll-top-button.is-visible {
   display: block;
 }
 
-/* 스크롤 등장 효과 */
+/* 스크롤할 때 요소가 나타나는 애니메이션 */
 .reveal {
-  opacity: 0;
-  transform: translateY(24px);
+  opacity: 0; /* 투명도: 0 >> 요소가 사라진게 아닌, 투명해서 보이지 않는 상태 */
+  transform: translateY(24px); /* Y축: 세로 방향. 아래로 24px 이동 */
   transition: opacity 0.5s ease, transform 0.5s ease;
+  /* opacity와 transform값을 0.5초동안 부드럽게 바꿔 */
 }
 
+/* 위로 올라오면서 선명하게 보임 */
 .reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 1; /* 완전히 보이게 해 */
+  transform: translateY(0); /* 24px 내려가있던것이 원래 위치로 올라옴 */
 }
 
-/* 화면 크기에 따른 반응형 처리 */
+/* 화면 크기에 따른 반응형 처리 
+768px 이상 시 해당 css 적용 */
 @media (min-width: 768px) {
   .navigation {
-    padding: 0 32px;
+    padding: 0 32px; /* 기존 20px에서 좌우 여백 32px로 늘림 */
   }
 
+  /* 화면이 넓으므로 햄버거 버튼 숨김 */
   .menu-button {
     display: none;
   }
-
+  /* 모바일용 드롭다운 메뉴를 데스크탑용 가로 메뉴로 변경 */
   .nav-menu {
-    position: static;
-    display: flex;
-    width: auto;
+    position: static; /* 떠있는 팝업 x */
+    display: flex; /* 메뉴를 가로로 배치 */
+    width: auto; /* 메뉴 너비 자동으로 설정 */
     margin-left: 14px;
-    padding: 0;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
+    padding: 0; /* 모바일 드롭다운에 있던 내부 여백 제거 */
+    border: 0; /* 모바일 메뉴 박스의 테두리 제거 */
+    background: transparent; /* 모바일 메뉴의 배경 박스 제거 */
+    box-shadow: none; /* 그림자도 제거 */
   }
-
+  
+  /* 메뉴 링크 주변 여백 조절 */
   .nav-menu a {
     padding: 8px 10px;
   }
-
+  /* 위아래, 좌우 여백 변경 */
   .hero,
   .section {
     padding: 110px 32px;
   }
 
+  /* 이미지와 설명 좌우 배치 (기존 1개 열 >> 2개 열) */
   .about-content {
-    grid-template-columns: 240px 1fr;
+    grid-template-columns: 240px 1fr; /* 첫번째칸: 240px, 두번째칸: 남은 공간 */
   }
 
+  /* 큰 화면에서 이미지가 좌우 배치 되므로 magin 0으로 조정 */
   .profile-image {
     margin: 0;
   }
 
+  /* skill 4개를 1줄로 구성 */
   .skills-list {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
+/* 화면이 어느 정도 넓어졌다면 모바일 디자인에서 태블릿/데스크톱 디자인으로 바꿔 
+화면 너비가 1024px 이상일 경우 css 추가 적용*/
 @media (min-width: 1024px) {
   .hero,
   .section {
     padding-right: 0;
-    padding-left: 0;
+    padding-left: 0; /* 큰 화면에서는 콘텐츠가 중앙에 잘 있기 때문에 좌우 패딩 제거 */
   }
 
+  /* footer 내용을 위에 있는 본문 내용과 좌우 선 맞추기 */
   .site-footer {
     padding-right: max(20px, calc((100vw - 1120px) / 2));
     padding-left: max(20px, calc((100vw - 1120px) / 2));
+    /* ((1440px(화면 전체 가로 넓이) - 1120px) / 2) = 160px
+    |←160px→|←──── 1120px ────→|←160px→|
+    max(20px, 계산값)인데 두 중 더 큰 값을 사용. 20px은 최솟값.
+    계산값이 작아버리면 footer 글씨가 화면 끝에 붙어버림
+    */
   }
 }
