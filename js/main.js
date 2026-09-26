@@ -154,8 +154,8 @@ const renderProjects = (status, repositories = []) => {
   }
 
   // loading, error, empty가 아닌 경우 >> success(프로젝트 카드 생성)
-  const projectCards = document.createDocumentFragment(); // createDocumentFragment(): 불러온 저장소를 담아둘 바구니
-  repositories.forEach((repository) => // forEach(): 배열 안의 요소를 하나씩 꺼내 반복
+  const projectCards = document.createDocumentFragment(); // createDocumentFragment(): 불러온 저장소를 담아둘 바구니 >> 카드를 모음
+  repositories.forEach((repository) => // forEach(): 배열 안의 객체를 하나씩 꺼냄
     projectCards.append( // 생성한 카드를 바구니에 append
       createProjectCard(repository) // createProjectCard(): 저장소 A,B,C를 각각 카드 A,B,C로 생성
     )
@@ -234,7 +234,7 @@ const handleSubmit = (event) => {
 
 const updateScrollUi = () => {
   elements.header.classList.toggle('is-scrolled', window.scrollY > 60);  //사용자가 페이지를 아래로 60px보다 많이 스크롤할 경우: is-scrolled class 추가
-  elements.scrollTopButton.classList.toggle('is-visible', window.scrollY > 300);
+  elements.scrollTopButton.classList.toggle('is-visible', window.scrollY > 300); // window.scrollY: 현재 브라우저 창이 세로로 얼마나 스크롤되었는지
 };
 
 const closeMenu = () => {
@@ -277,17 +277,17 @@ const initRevealAnimation = () => {
 };
 
 const bindEvents = () => {
-  elements.themeButton.addEventListener('click', toggleTheme);
+  elements.themeButton.addEventListener('click', toggleTheme); // 대상.addEventListener('이벤트이름', 실행할함수);
   elements.menuButton.addEventListener('click', toggleMenu);
   document.querySelectorAll('a[href^="#"]').forEach((link) => {
     link.addEventListener('click', handleAnchorClick);
   });
   elements.scrollTopButton.addEventListener('click', scrollToTop);
-  window.addEventListener('scroll', updateScrollUi);
+  window.addEventListener('scroll', updateScrollUi); // 현재 브라우저 창에서 스크롤이 발생하면 updateScrollUi 함수 실행
   FIELD_NAMES.forEach((fieldName) => {
     elements.inputs[fieldName].addEventListener('input', handleFieldInput);
   });
-  elements.contactForm.addEventListener('submit', handleSubmit);
+  elements.contactForm.addEventListener('submit', handleSubmit); // contact-form에서 submit 사건 발생 시 handleSubmit 함수 실행
 };
 
 const init = () => {
