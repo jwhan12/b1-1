@@ -2,8 +2,8 @@
 <html lang="ko">  <!--html: 태그, lang="ko": 속성(attribute)-->
   <head>  <!--웹페이지 설정 정보(사용자가 직접 보는 내용보다 브라우저에게 알려주는 내용)-->
     <meta charset="UTF-8" />  <!--UTF-8 문자 인코딩으로 한글 깨지지 않게 설정-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />  <!--모바일 화면에서도 제대로 보이게 설정-->
-    <meta name="description" content="jwhan12의 반응형 포트폴리오 웹사이트" />  <!--이 사이트가 어떤 사이트인지 설명-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />  <!--모바일 같이 작은 화면에서 어떻게 보여줄지 설정-->
+    <meta name="description" content="jwhan12의 반응형 포트폴리오 웹사이트" />  <!--이 웹사이트가 어떤 사이트인지 설명-->
     <title>jwhan12 | Portfolio</title>  <!--브라우저 탭에 보이는 제목-->
     <link rel="stylesheet" href="css/style.css" />  <!--style.css 파일 연결-->
     <script src="js/main.js" defer></script>  <!--main.js 파일 연결, defer로 인해 HTML 끝까지 읽은 후 DOM 생성 후 main.js 실행-->
@@ -112,7 +112,7 @@
             <textarea id="message" name="message" rows="5"></textarea>  <!--<textarea>: 긴 글 입력-->
             <p class="error-message" id="message-error"></p>
           </div>
-          <button class="button button--primary" type="submit">보내기</button>
+          <button class="button button--primary" type="submit">보내기</button> <!--type="submit"은 내가 속한 <form>을 제출하는 버튼-->
           <p class="success-message" id="form-success" aria-live="polite"></p>
         </form>
       </section>
